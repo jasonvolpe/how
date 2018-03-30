@@ -1,8 +1,11 @@
 git:
-  depth: 1
+  depth: 5
+before_install:
+  - which how || echo "no existing install"
 install:
   - ./install.sh
 script:
+  - cat $HOME/.how
   - how --help
   - how --update
 sudo: true
