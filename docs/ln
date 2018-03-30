@@ -1,0 +1,4 @@
+ln - create links
+
+Creates a symbolic link to a file
+ln -s /some/file /path/of/link
