@@ -17,9 +17,9 @@ function main() {
 
 	echo "installing in ${path}..."
 
-	$(sudo git clone "${GIT_URL}" "${path}")
+	$(git clone "${GIT_URL}" "${path}")
 
-	$(sudo ln "${path}/${HOW}" "${INSTALL_ALIAS_PATH}/${HOW}")
+	$(ln "${path}/${HOW}" "${INSTALL_ALIAS_PATH}/${HOW}")
 }
 
 main "$@"
