@@ -1,11 +1,9 @@
 git:
   depth: 5
-before_install:
-  - rm how
 install:
   - ./install.sh
 script:
   - cat $HOME/.how
   - how --help
-  - how --update
+  - how --update || echo failed
 sudo: true
