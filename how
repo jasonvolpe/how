@@ -72,11 +72,14 @@ function update() {
 	local install_path
 	install_path="$(install_path_from_config)"
 
+	echo "Updating ${install_path}"
+
 	cd "${install_path}"
 
-	if ! $(git pull); then
-		echo "Try 'sudo how --update'"
-		return ${E_PERMISSIONS}
+	if [[ $(test -w "${install_path}/.git") ]]; then
+		git pull
+	else
+		sudo git pull
 	fi
 }
 

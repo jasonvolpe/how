@@ -1,6 +1,9 @@
 git:
-  depth: 1
+  depth: 5
 install:
-  - sudo ./install.sh
-script: how --help
+  - ./install.sh
+script:
+  - cat $HOME/.how
+  - how --help
+  - how --update || echo failed
 sudo: true
