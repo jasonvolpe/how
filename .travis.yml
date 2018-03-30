@@ -2,5 +2,8 @@ git:
   depth: 1
 install:
   - sudo ./install.sh
-script: how --help
+script:
+  - how du
+  - how --help
+  - how --update
 sudo: true
