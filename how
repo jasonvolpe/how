@@ -3,14 +3,18 @@
 # how to do things
 ##################################################
 
+set -e
+
 readonly VERSION="0.1"
 readonly DOCS_DIR="docs"
+readonly HOW_CONFIG="${HOME}/.how"
 readonly READER="less"
 
 readonly E_ARGS=2
 readonly E_404=3
 readonly E_NOT_CMD=5
 readonly E_MISSING_HOW=7
+readonly E_PERMISSIONS=11
 
 ##################################################
 # Displays the how-doc or errors.
@@ -51,6 +55,32 @@ function is_a_command() {
 }
 
 ##################################################
+# Reads installation path from $HOME/.how file.
+# Path stored in HOW_ROOT variable.
+##################################################
+function install_path_from_config() {
+	local install_path
+	source "${HOW_CONFIG}"
+	install_path="${HOW_ROOT}"
+	echo "${install_path}"
+}
+
+##################################################
+# Pulls the latest commits.
+##################################################
+function update() {
+	local install_path
+	install_path="$(install_path_from_config)"
+
+	cd "${install_path}"
+
+	if ! $(git pull); then
+		echo "Try 'sudo how --update'"
+		return ${E_PERMISSIONS}
+	fi
+}
+
+##################################################
 # Prints help text
 ##################################################
 function print_help() {
@@ -69,6 +99,9 @@ function main {
 	case "$1" in
 		-h|--help)
 			print_help
+			;;
+		--update)
+			update
 			;;
 		*)
 			show_doc "$1" && return 0
