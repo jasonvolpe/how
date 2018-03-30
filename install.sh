@@ -14,14 +14,27 @@ readonly HOW_CONFIG="${HOME}/.how"
 
 function main() {
 	local path
+	local alias_path
 	path="${INSTALL_ROOT}/${INSTALL_DIR}"
+	alias_path="${INSTALL_ALIAS_PATH}/${HOW}"
 
 	echo "installing in ${path}"
 
-	git clone "${GIT_URL}" "${path}"
+	# Clone how repo
+	if [[ $(test -w "${path}") ]]; then
+		git clone "${GIT_URL}" "${path}"
+	else
+		sudo git clone "${GIT_URL}" "${path}"
+	fi
 
-	ln "${path}/${HOW}" "${INSTALL_ALIAS_PATH}/${HOW}"
+	# Create symlink
+	if [[ $(test -w "${alias_path}") ]]; then
+		ln "${path}/${HOW}" "${alias_path}"
+	else
+		sudo ln "${path}/${HOW}" "${alias_path}"
+	fi
 
+	# Write install path to $HOME/.how
 	echo "HOW_ROOT=\"${path}\"" > "${HOW_CONFIG}"
 }
 
