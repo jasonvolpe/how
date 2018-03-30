@@ -1,0 +1,4 @@
+du - disk usage
+
+Prints file and directory sizes on directory deep, human readable
+du -d1 -h
