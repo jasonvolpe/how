@@ -4,5 +4,6 @@ install:
   - sudo ./install.sh
 script:
   - how --help
-  - how --update
+  - how --update || sudo how --update
+  - how asdf; [[ $? -eq 5]]
 sudo: true
