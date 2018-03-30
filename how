@@ -1,0 +1,87 @@
+#!/usr/bin/env bash
+#
+# how to do things
+##################################################
+
+readonly VERSION="0.1"
+readonly DOCS_DIR="docs"
+readonly READER="less"
+
+readonly E_ARGS=2
+readonly E_404=3
+readonly E_NOT_CMD=5
+readonly E_MISSING_HOW=7
+
+##################################################
+# Displays the how-doc or errors.
+#
+# args:
+#		command (string) - how-doc to display
+#
+# errors:
+#		E_404 - how-doc not found
+##################################################
+function show_doc() {
+	local doc
+	doc="$DOCS_DIR/$1"
+
+	if [[ -e ${doc} ]]; then
+		${READER} "${doc}"
+		return
+	else
+		return ${E_404}
+	fi
+}
+
+##################################################
+# Checks if a command exists on the path.
+#
+# params:
+#		cmd (string) - check if a command exists
+#
+# errors:
+#		E_NOT_CMD - no matching command found
+##################################################
+function is_a_command() {
+	if $(which "$1"); then
+		return 0
+	else
+		return ${E_NOT_CMD}
+	fi
+}
+
+##################################################
+# Prints help text
+##################################################
+function print_help() {
+	echo "how <command>\tprint how-doc for command"
+}
+
+function main {
+	readonly PARAMS=1
+
+	# check args
+	if ! [[ $# -eq ${PARAMS} ]]; then
+		print_help
+		return ${E_ARGS}
+	fi
+
+	case "$1" in
+		-h|--help)
+			print_help
+			;;
+		*)
+			show_doc "$1" && return 0
+
+			if [[ $(is_a_command "$1") ]]; then
+				echo "how-doc for '$1' does not exist"
+				return ${E_MISSING_HOW}
+			else
+				echo "no how-doc for unknown command '$1'"
+				return ${E_NOT_CMD}
+			fi
+			;;
+	esac
+}
+
+main "$@"
