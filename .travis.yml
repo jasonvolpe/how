@@ -3,7 +3,6 @@ git:
 install:
   - sudo ./install.sh
 script:
-  - how du
   - how --help
   - how --update
 sudo: true
