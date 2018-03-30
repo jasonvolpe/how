@@ -1,7 +1,7 @@
 git:
   depth: 5
 before_install:
-  - which how || echo "no existing install"
+  - rm how
 install:
   - ./install.sh
 script:
