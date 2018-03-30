@@ -1,0 +1,4 @@
+lsof - list open files
+
+Lists open TCP sockets
+lsof -i tcp
