@@ -1,0 +1,4 @@
+curl - transfer data with urls
+
+Get URL, silence http failures, no output, show errors, follow redirects
+curl -fsSL http://site.biz
