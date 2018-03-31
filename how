@@ -16,6 +16,8 @@ readonly E_NOT_CMD=5
 readonly E_MISSING_HOW=7
 readonly E_PERMISSIONS=11
 
+source "${HOW_CONFIG}"
+
 ##################################################
 # Displays the how-doc or errors.
 #
@@ -27,7 +29,7 @@ readonly E_PERMISSIONS=11
 ##################################################
 function show_doc() {
 	local doc
-	doc="$DOCS_DIR/$1"
+	doc="$(install_path_from_config)/${DOCS_DIR}/$1"
 
 	if [[ -e ${doc} ]]; then
 		${READER} "${doc}"
@@ -60,7 +62,6 @@ function is_a_command() {
 ##################################################
 function install_path_from_config() {
 	local install_path
-	source "${HOW_CONFIG}"
 	install_path="${HOW_ROOT}"
 	echo "${install_path}"
 }
