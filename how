@@ -88,7 +88,7 @@ function update() {
 # Prints help text
 ##################################################
 function print_help() {
-	echo "how <command>\tprint how-doc for command"
+	echo -e "how <command>\tprint how-doc for command"
 }
 
 function main {
