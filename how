@@ -74,14 +74,9 @@ function update() {
 	install_path="$(install_path_from_config)"
 
 	echo "Updating ${install_path}"
-
-	cd "${install_path}"
-
-	if [[ $(test -w "${install_path}/.git") ]]; then
-		git pull
-	else
-		sudo git pull
-	fi
+	pushd "${install_path}"
+	git pull
+	popd
 }
 
 ##################################################
