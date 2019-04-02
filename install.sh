@@ -23,15 +23,11 @@ function main() {
 	# Clone how repo
 	if [[ $(test -w "${path}") ]]; then
 		git clone "${GIT_URL}" "${path}"
-	else
-		sudo git clone "${GIT_URL}" "${path}"
 	fi
 
 	# Create symlink
 	if [[ $(test -w "${alias_path}") ]]; then
 		ln "${path}/${HOW}" "${alias_path}"
-	else
-		sudo ln "${path}/${HOW}" "${alias_path}"
 	fi
 
 	# Write install path to $HOME/.how
