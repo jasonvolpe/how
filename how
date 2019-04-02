@@ -83,7 +83,11 @@ function update() {
 # Prints help text
 ##################################################
 function print_help() {
-	echo -e "how <command>\tprint how-doc for command"
+	echo -e """Usage:
+  how <command>\tprint how-doc for command
+  how update\tUpdate how and docs
+  how help\tPrint this help text
+"""
 }
 
 function main {
@@ -96,10 +100,10 @@ function main {
 	fi
 
 	case "$1" in
-		-h|--help)
+		help)
 			print_help
 			;;
-		--update)
+		update)
 			update
 			;;
 		*)
