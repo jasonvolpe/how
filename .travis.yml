@@ -3,6 +3,7 @@ git:
 install:
   - ./install.sh $(pwd)
 script:
+  - which how
   - cat $HOME/.how
   - how help
   - how update || echo failed
