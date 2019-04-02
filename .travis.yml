@@ -6,4 +6,4 @@ script:
   - cat $HOME/.how
   - how help
   - how update || echo failed
-sudo: true
+sudo: false
