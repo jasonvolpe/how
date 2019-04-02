@@ -4,6 +4,6 @@ install:
   - ./install.sh
 script:
   - cat $HOME/.how
-  - how --help
-  - how --update || echo failed
+  - how help
+  - how update || echo failed
 sudo: true
