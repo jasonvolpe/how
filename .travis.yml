@@ -1,6 +1,8 @@
 git:
   depth: 5
 install:
+  - rm /usr/local/bin/how
+  - rm -rf /usr/local/how
   - ./install.sh $(pwd)
 script:
   - which how
