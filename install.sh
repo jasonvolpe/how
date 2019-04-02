@@ -22,16 +22,16 @@ function main() {
 	alias_path="${INSTALL_ALIAS_PATH}/${HOW}"
 	repo="${1:-$GIT_URL}"
 
-	echo "Installing in ${path} from ${repo}"
-
 	# Clone how repo
 	if [[ $(test -w "${path}") ]]; then
-		git clone "${repo}" "${path}"
+		echo "Cloning ${repo} to ${path}"
+		git clone "${repo}" "${path}" || exit 1
 	fi
 
 	# Create symlink
 	if [[ $(test -w "${alias_path}") ]]; then
-		ln "${path}/${HOW}" "${alias_path}"
+		echo "Creating symlink ${alias_path}"
+		ln "${path}/${HOW}" "${alias_path}" || exit 3
 	fi
 
 	# Write install path to $HOME/.how
